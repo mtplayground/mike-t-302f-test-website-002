@@ -78,6 +78,46 @@
     @apply min-h-screen bg-background;
   }
 
+  .site-header {
+    @apply sticky top-0 z-40 border-b bg-surface/90 backdrop-blur;
+  }
+
+  .site-header-inner {
+    @apply flex h-16 items-center justify-between;
+  }
+
+  .site-wordmark {
+    @apply inline-flex items-center gap-3 rounded-md font-display text-body font-bold text-foreground no-underline;
+  }
+
+  .site-wordmark-mark {
+    @apply grid h-9 w-9 place-items-center rounded-md bg-foreground text-body-sm font-bold text-background;
+  }
+
+  .site-nav {
+    @apply hidden items-center gap-1 md:flex;
+  }
+
+  .site-nav-link {
+    @apply rounded-md px-3 py-2 text-body-sm font-bold text-muted no-underline transition-colors hover:bg-surface-raised hover:text-foreground focus-visible:bg-surface-raised;
+  }
+
+  .site-menu-button {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-md border bg-surface text-foreground transition-colors hover:bg-surface-raised md:hidden;
+  }
+
+  .site-mobile-nav {
+    @apply border-t bg-surface md:hidden;
+  }
+
+  .site-mobile-nav-list {
+    @apply flex flex-col py-2;
+  }
+
+  .site-mobile-nav-link {
+    @apply rounded-md px-3 py-3 text-body-sm font-bold text-muted no-underline transition-colors hover:bg-surface-raised hover:text-foreground focus-visible:bg-surface-raised;
+  }
+
   .site-main {
     @apply min-h-screen py-section-sm;
   }
