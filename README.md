@@ -10,6 +10,15 @@ Install dependencies:
 npm install
 ```
 
+Create local environment values:
+
+```bash
+cp .env.example .env.local
+```
+
+`NEXT_PUBLIC_CTA_URL` configures the public CTA destination embedded in static
+builds.
+
 Run the development server on `0.0.0.0:8080`:
 
 ```bash
