@@ -70,8 +70,22 @@
 }
 
 @layer components {
+  .skip-link {
+    @apply fixed left-4 top-4 z-50 -translate-y-20 rounded-md bg-foreground px-4 py-2 text-body-sm font-bold text-background transition-transform focus:translate-y-0;
+  }
+
+  .site-shell {
+    @apply min-h-screen bg-background;
+  }
+
+  .site-main {
+    @apply min-h-screen py-section-sm;
+  }
+
   .page-shell {
-    @apply grid min-h-screen place-items-center px-5 py-section-sm;
+    min-height: calc(100vh - 7rem);
+
+    @apply grid place-items-center;
   }
 
   .intro {

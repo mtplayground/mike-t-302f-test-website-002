@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
+import { ContentContainer } from "@/components/layout/content-container";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
   title: "Mike T Test Website",
@@ -12,8 +26,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <div className="site-shell">
+          <main id="main-content" className="site-main">
+            <ContentContainer>{children}</ContentContainer>
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

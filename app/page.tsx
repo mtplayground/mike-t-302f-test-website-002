@@ -6,10 +6,10 @@ const projectDetails = [
 
 export default function Home() {
   return (
-    <main className="page-shell">
-      <section className="intro">
+    <section className="page-shell" aria-labelledby="intro-title">
+      <div className="intro">
         <p className="eyebrow">Issue #1</p>
-        <h1>Next.js project initialized</h1>
+        <h1 id="intro-title">Next.js project initialized</h1>
         <p className="summary">
           This repository is ready for application work with the App Router,
           TypeScript, and a repeatable local development workflow.
@@ -19,7 +19,7 @@ export default function Home() {
             <li key={detail}>{detail}</li>
           ))}
         </ul>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
