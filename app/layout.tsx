@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { ContentContainer } from "@/components/layout/content-container";
+import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
           <main id="main-content" className="site-main">
             <ContentContainer>{children}</ContentContainer>
           </main>
+          <Footer />
         </div>
       </body>
     </html>
