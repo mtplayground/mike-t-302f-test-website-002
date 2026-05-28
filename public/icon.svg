@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Agent Team icon</title>
+  <desc id="desc">Agent Team initials on a blue and dark navy app icon.</desc>
+  <rect width="512" height="512" rx="96" fill="#101828" />
+  <path d="M96 104h320v304H96z" rx="42" fill="#2563eb" opacity="0.16" />
+  <path d="M142 142h228c22 0 40 18 40 40v148c0 22-18 40-40 40H142c-22 0-40-18-40-40V182c0-22 18-40 40-40Z" fill="#ffffff" opacity="0.08" />
+  <path d="M146 332 220 156h46l74 176h-44l-15-40h-78l-15 40h-42Zm70-74h52l-26-68-26 68Zm124-68v-34h132v34h-46v142h-40V190h-46Z" fill="#ffffff" />
+</svg>

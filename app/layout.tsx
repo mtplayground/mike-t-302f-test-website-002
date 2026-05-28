@@ -31,6 +31,34 @@ const ogImage = {
 export const metadata: Metadata = {
   applicationName: siteName,
   description: siteDescription,
+  icons: {
+    apple: [
+      {
+        sizes: "180x180",
+        type: "image/png",
+        url: "/apple-touch-icon.png",
+      },
+    ],
+    icon: [
+      {
+        url: "/favicon.ico",
+      },
+      {
+        type: "image/svg+xml",
+        url: "/icon.svg",
+      },
+      {
+        sizes: "192x192",
+        type: "image/png",
+        url: "/icon-192.png",
+      },
+      {
+        sizes: "512x512",
+        type: "image/png",
+        url: "/icon-512.png",
+      },
+    ],
+  },
   metadataBase: new URL("https://example.com"),
   openGraph: {
     description: siteDescription,
