@@ -182,4 +182,25 @@
   .hero-media img {
     @apply aspect-[4/3] h-full w-full object-cover;
   }
+
+  .value-section {
+    @apply border-t;
+    scroll-margin-top: 4rem;
+  }
+
+  .value-header {
+    @apply mx-auto text-center;
+  }
+
+  .value-grid {
+    @apply mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4;
+  }
+
+  .value-card {
+    @apply h-full;
+  }
+
+  .value-card-title {
+    @apply text-xl font-bold text-foreground;
+  }
 }
