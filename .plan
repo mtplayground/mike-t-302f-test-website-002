@@ -1,0 +1,25 @@
+Architecture plan
+
+Scope
+- Issue #1 initializes a Next.js project using the App Router and TypeScript.
+- There are no cross-issue dependencies yet; the repository is currently a minimal README plus setup files.
+
+Module structure and file organization
+- Use the repository root as the Next.js application root.
+- Place route files under `app/`, starting with `app/layout.tsx`, `app/page.tsx`, and `app/globals.css`.
+- Keep static assets in `public/`.
+- Keep project configuration at the root: `package.json`, `next.config.*`, `tsconfig.json`, ESLint configuration, and PostCSS/Tailwind files if selected during scaffolding.
+- Add shared code later only when needed:
+  - `components/` for reusable UI components.
+  - `lib/` for framework-agnostic utilities and service helpers.
+  - `types/` or colocated exported TypeScript types for shared domain contracts.
+
+Dependencies between issues
+- Issue #1 is the foundation for all future work because it establishes the framework, TypeScript compiler settings, package manager lockfile, and development scripts.
+- Future feature issues should build on the App Router conventions introduced here rather than adding a separate routing system.
+
+Key design decisions
+- Prefer a standard Next.js App Router scaffold to minimize custom configuration.
+- Use TypeScript from the start with strict-enough defaults supplied by the scaffold.
+- Keep the initial app intentionally small: verified build/dev tooling first, then add UI and domain modules in later issues.
+- Avoid introducing backend services, databases, or state-management libraries until a feature issue requires them.
