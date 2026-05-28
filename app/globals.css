@@ -266,4 +266,37 @@
   .features-card-title {
     @apply text-xl font-bold text-foreground;
   }
+
+  .cta-section {
+    @apply border-t bg-foreground text-background;
+    scroll-margin-top: 4rem;
+  }
+
+  .cta-content {
+    @apply grid gap-8 py-section-sm md:grid-cols-[minmax(0,1fr)_auto] md:items-center;
+  }
+
+  .cta-copy {
+    @apply max-w-3xl;
+  }
+
+  .cta-eyebrow {
+    @apply mb-3 text-body-sm font-bold uppercase tracking-normal text-accent-soft;
+  }
+
+  .cta-title {
+    @apply text-display-sm text-background;
+  }
+
+  .cta-description {
+    @apply mt-5 max-w-2xl text-body-lg text-background/80;
+  }
+
+  .cta-actions {
+    @apply flex flex-wrap items-center gap-3 md:justify-end;
+  }
+
+  .cta-button {
+    @apply bg-background text-foreground hover:bg-accent-soft;
+  }
 }
