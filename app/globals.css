@@ -4,49 +4,89 @@
 
 :root {
   color-scheme: light;
-  --background: #f7f7f2;
-  --foreground: #1f2328;
-  --muted: #586069;
-  --accent: #1f6feb;
-  --surface: #ffffff;
-  --border: #d8dee4;
+  --color-background: 246 247 249;
+  --color-foreground: 16 24 40;
+  --color-muted: 86 99 120;
+  --color-surface: 255 255 255;
+  --color-surface-raised: 248 250 252;
+  --color-border: 208 215 222;
+  --color-accent: 37 99 235;
+  --color-accent-contrast: 255 255 255;
+  --color-accent-soft: 219 234 254;
+  --color-accent-strong: 29 78 216;
+  --color-support-coral: 194 65 12;
+  --color-support-teal: 15 118 110;
+  --color-ring: 37 99 235;
+  --shadow-panel: 16 24 40;
+  --font-display: Arial;
+  --font-sans: Arial;
 }
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+
   html,
   body {
     min-height: 100%;
   }
 
+  html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background font-sans text-foreground;
+    @apply bg-background font-sans text-body text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-accent-soft text-foreground;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  a {
+    @apply text-inherit underline-offset-4;
   }
 
   h1 {
-    margin: 0;
-    font-size: clamp(2rem, 6vw, 4rem);
-    line-height: 1;
+    @apply m-0 font-display text-display-md font-bold text-foreground;
+  }
+
+  h2,
+  h3,
+  h4 {
+    @apply m-0 font-display font-bold text-foreground;
+  }
+
+  p {
+    @apply m-0;
   }
 }
 
 @layer components {
   .page-shell {
-    @apply grid min-h-screen place-items-center px-5 py-12;
+    @apply grid min-h-screen place-items-center px-5 py-section-sm;
   }
 
   .intro {
     width: min(100%, 720px);
     padding: clamp(28px, 5vw, 56px);
 
-    @apply rounded-lg border border-border bg-surface shadow-panel;
+    @apply rounded-lg border bg-surface shadow-panel;
   }
 
   .eyebrow {
-    @apply mb-3 mt-0 text-sm font-bold uppercase tracking-normal text-accent;
+    @apply mb-3 text-body-sm font-bold uppercase tracking-normal text-accent;
   }
 
   .summary {
-    @apply mt-6 max-w-prose text-lg leading-8 text-muted;
+    @apply mt-6 max-w-prose text-body-lg text-muted;
   }
 
   .details {
@@ -54,6 +94,6 @@
   }
 
   .details li {
-    @apply rounded-full border border-border px-3 py-2 text-[0.95rem] text-foreground;
+    @apply rounded-full border px-3 py-2 text-body-sm text-foreground;
   }
 }
