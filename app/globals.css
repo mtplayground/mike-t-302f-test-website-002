@@ -75,7 +75,7 @@
   }
 
   .site-shell {
-    @apply min-h-screen bg-background;
+    @apply flex min-h-screen flex-col bg-background;
   }
 
   .site-header {
@@ -119,7 +119,35 @@
   }
 
   .site-main {
-    @apply min-h-screen py-section-sm;
+    @apply flex-1 py-section-sm;
+  }
+
+  .site-footer {
+    @apply border-t bg-surface;
+  }
+
+  .site-footer-inner {
+    @apply grid gap-8 py-8 md:grid-cols-[1fr_auto] md:items-start;
+  }
+
+  .site-footer-brand {
+    @apply grid gap-3;
+  }
+
+  .site-footer-text {
+    @apply max-w-sm text-body-sm text-muted;
+  }
+
+  .site-footer-links {
+    @apply flex flex-wrap gap-2 md:justify-end;
+  }
+
+  .site-footer-link {
+    @apply rounded-md px-3 py-2 text-body-sm font-bold text-muted no-underline transition-colors hover:bg-surface-raised hover:text-foreground focus-visible:bg-surface-raised;
+  }
+
+  .site-footer-copy {
+    @apply text-body-sm text-muted md:col-span-2;
   }
 
   .page-shell {
