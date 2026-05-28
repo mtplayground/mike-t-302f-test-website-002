@@ -245,4 +245,25 @@
   .how-step-description {
     @apply mt-4;
   }
+
+  .features-section {
+    @apply border-t;
+    scroll-margin-top: 4rem;
+  }
+
+  .features-header {
+    @apply mx-auto text-center;
+  }
+
+  .features-grid {
+    @apply mt-10 grid gap-4 lg:grid-cols-3;
+  }
+
+  .features-card {
+    @apply h-full;
+  }
+
+  .features-card-title {
+    @apply text-xl font-bold text-foreground;
+  }
 }
