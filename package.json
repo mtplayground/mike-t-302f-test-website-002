@@ -8,6 +8,7 @@
     "serve": "serve out --listen tcp://0.0.0.0:8080",
     "start": "npm run serve",
     "test:e2e": "playwright test",
+    "verify:static": "npm run build && node scripts/verify-static-export.mjs",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
