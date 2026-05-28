@@ -8,4 +8,8 @@ export const navigationItems: readonly NavigationItem[] = [
     label: "Home",
     href: "#home",
   },
+  {
+    label: "Value",
+    href: "#value",
+  },
 ];
