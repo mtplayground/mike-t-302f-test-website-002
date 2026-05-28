@@ -21,3 +21,11 @@ Build for production:
 ```bash
 npm run build
 ```
+
+The production build is a static export emitted to `out/`.
+
+Serve the static bundle on `0.0.0.0:8080`:
+
+```bash
+npm run serve
+```
