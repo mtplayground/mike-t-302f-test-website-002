@@ -1,25 +1,43 @@
 Architecture plan
 
 Scope
-- Issue #1 initializes a Next.js project using the App Router and TypeScript.
-- There are no cross-issue dependencies yet; the repository is currently a minimal README plus setup files.
+- Issues #3-#12 turn the existing Next.js App Router TypeScript scaffold into a statically exported marketing site for "Agent Team for Founders".
+- The site should stay frontend-only for this batch: static routes, public environment variables for configurable links, reusable UI primitives, and section components composed on the home page.
 
 Module structure and file organization
-- Use the repository root as the Next.js application root.
-- Place route files under `app/`, starting with `app/layout.tsx`, `app/page.tsx`, and `app/globals.css`.
-- Keep static assets in `public/`.
-- Keep project configuration at the root: `package.json`, `next.config.*`, `tsconfig.json`, ESLint configuration, and PostCSS/Tailwind files if selected during scaffolding.
-- Add shared code later only when needed:
-  - `components/` for reusable UI components.
-  - `lib/` for framework-agnostic utilities and service helpers.
-  - `types/` or colocated exported TypeScript types for shared domain contracts.
+- Keep the repository root as the Next.js application root.
+- App shell:
+  - `app/layout.tsx` owns `html`/`body`, metadata, font loading, and shared header/footer composition once those components exist.
+  - `app/page.tsx` composes page sections in order: hero, value proposition, and future sections.
+  - `app/globals.css` contains Tailwind directives, CSS custom properties, reset/base styles, and global element defaults.
+- Shared components:
+  - `components/layout/header.tsx` for sticky desktop/mobile navigation.
+  - `components/layout/footer.tsx` for brand, copyright, and basic links.
+  - `components/sections/hero.tsx` and `components/sections/value-proposition.tsx` for homepage content blocks.
+  - `components/ui/button.tsx`, `components/ui/section.tsx`, `components/ui/card.tsx`, and `components/ui/icon.tsx` for primitives reused by layout and sections.
+- Configuration and support files:
+  - `tailwind.config.ts` and `postcss.config.mjs` for Tailwind.
+  - `prettier.config.mjs` and ESLint config at the root for formatting/linting conventions.
+  - `.env.example` documents public environment variables such as `NEXT_PUBLIC_CTA_URL`.
+  - `lib/env.ts` can centralize safe reads of public env values and default fallbacks.
+  - `lib/navigation.ts` can hold shared anchor IDs/labels used by header, footer, and sections.
+- Shared types should be colocated when narrow. Promote to `types/` only if multiple unrelated modules need the same contract.
 
 Dependencies between issues
-- Issue #1 is the foundation for all future work because it establishes the framework, TypeScript compiler settings, package manager lockfile, and development scripts.
-- Future feature issues should build on the App Router conventions introduced here rather than adding a separate routing system.
+- #3 is the foundation for styling and code quality; #6 and all UI work depend on Tailwind being wired.
+- #4 depends on the scaffold and should configure `output: "export"` plus scripts before deployment-sensitive UI work accumulates.
+- #5 depends on the scaffold and should land before hero/header CTAs need a configurable target.
+- #6 depends on #3 and defines the visual contract consumed by #7-#12.
+- #7 depends on #3/#6 and establishes the root shell that #8 and #9 plug into.
+- #8 and #9 depend on #7 plus UI primitives from #10 where practical. If #10 lands later, keep their first implementation small and refactor onto primitives during #10.
+- #10 depends on #6 because primitives should encode design tokens rather than hard-coded one-off styles.
+- #11 depends on #5, #6, #7, and preferably #10 for CTA/button and section composition.
+- #12 depends on #6 and #10, and should reuse the shared section/card patterns.
 
 Key design decisions
-- Prefer a standard Next.js App Router scaffold to minimize custom configuration.
-- Use TypeScript from the start with strict-enough defaults supplied by the scaffold.
-- Keep the initial app intentionally small: verified build/dev tooling first, then add UI and domain modules in later issues.
-- Avoid introducing backend services, databases, or state-management libraries until a feature issue requires them.
+- Use static export from Next.js; avoid server-only APIs, dynamic route behavior that cannot export, and runtime secrets.
+- Use Tailwind for component styling with design tokens expressed in the Tailwind theme and mirrored as CSS variables where global styles need them.
+- Keep the palette restrained and professional for a founder-focused software service; prioritize readable contrast, strong spacing rhythm, and responsive density over decorative effects.
+- Treat navigation items and CTA URLs as shared data so header, footer, hero, and sections do not drift.
+- Use small, typed React components with simple props; avoid introducing state libraries or animation libraries for these initial sections.
+- Preserve the App Router conventions and keep the home page composition explicit so later issues can add sections without changing routing architecture.
