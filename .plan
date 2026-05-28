@@ -1,53 +1,54 @@
 Architecture plan
 
 Scope
-- Issues #23-#32 finish the existing statically exported Next.js App Router marketing site for ZeroClaw / "Agent Team for Founders".
-- The current foundation already includes the root shell, shared layout components, UI primitives, hero section, value proposition section, Tailwind, static export scripts, and public CTA environment wiring.
-- This batch should add the remaining homepage sections, compose the final route, configure social/search metadata assets, then verify responsive, accessibility, E2E, export, and plain static serving behavior.
+- Current batch has 0 implementation issues. This session only prepares the
+  repository and records the architecture for future issue-by-issue work.
+- The repository is an existing static Next.js App Router site with TypeScript,
+  Tailwind CSS, shared React components, static assets, and Playwright smoke
+  coverage.
 
 Module structure and file organization
-- Keep the repository root as the Next.js application root.
-- App shell:
-  - `app/layout.tsx` owns `html`/`body`, font loading, global metadata, skip link, and shared `Header`/`Footer`.
-  - `app/page.tsx` should remain the explicit homepage composition point. Final order: `Hero`, `ValueProposition`, `HowItWorks`, `FeaturesBenefits`, and `CallToAction`.
-  - `app/globals.css` holds Tailwind directives, design tokens, base styles, accessibility helpers, and any final responsive polish that belongs globally.
-- Section components:
-  - Existing: `components/sections/hero.tsx`, `components/sections/value-proposition.tsx`.
-  - Add: `components/sections/how-it-works.tsx`, `components/sections/features-benefits.tsx`, `components/sections/call-to-action.tsx`.
-  - Each section should expose one named React component and own its narrow copy/data arrays unless the data is shared elsewhere.
-- Shared primitives and layout:
-  - Reuse `components/ui/button.tsx`, `components/ui/card.tsx`, `components/ui/icon.tsx`, `components/ui/section.tsx`, and `components/layout/content-container.tsx`.
-  - Avoid new component abstractions unless two or more sections need the same behavior or markup contract.
-- Shared configuration and types:
-  - `lib/env.ts` remains the single source for public CTA URL/default handling.
-  - `lib/navigation.ts` remains the source for anchor IDs and nav labels used by header/footer/sections.
-  - Keep data item types colocated with each section, such as `HowItWorksStep` or `FeatureBenefit`, unless multiple modules need them.
-- Static assets:
-  - Favicon and OG assets belong under `public/`, preferably `public/favicon.ico`, `public/icon.svg` or PNG variants, and `public/images/og-image.png`.
-  - `robots.txt` and `sitemap.xml` belong directly in `public/` for static export.
-- Tests and verification:
-  - Add Playwright configuration/tests only when issue #31 is implemented, likely under `tests/e2e/` or `e2e/` using the repo's existing conventions at that time.
-  - Static export verification for #32 should exercise `npm run build` and `npm run serve` against `out/`.
+- `app/` contains the App Router surface. `app/layout.tsx` owns global metadata,
+  the shared shell, and document-level structure. `app/page.tsx` composes the
+  homepage sections.
+- `components/layout/` contains page shell components such as the header,
+  footer, and content container.
+- `components/sections/` contains standalone homepage sections. Section-local
+  content arrays and narrow types should stay colocated with each section unless
+  reused elsewhere.
+- `components/ui/` contains reusable primitives such as buttons, cards, icons,
+  and section wrappers. Future changes should prefer these primitives over new
+  styling patterns.
+- `lib/` contains shared non-UI helpers and configuration, including public
+  environment handling, navigation data, and class name composition.
+- `public/` contains static assets, favicon/icon files, share images, robots,
+  and sitemap files required by the static export.
+- `tests/e2e/` contains browser smoke tests for the statically rendered user
+  experience.
 
 Dependencies between issues
-- #23 and #24 both depend on the existing shared UI primitives and design tokens. They can be implemented independently after the current `Hero` and `ValueProposition` sections.
-- #25 depends on the public CTA URL handling in `lib/env.ts` and should reuse the same button/link pattern as the hero CTA.
-- #26 depends on #23, #24, #25, plus the existing hero and value proposition sections. It should only compose sections and ensure anchor targets line up with navigation.
-- #27 depends on the brand/content direction already present in the hero/value proposition copy. It can precede #28 but should reference stable asset paths that #28 will add.
-- #28 depends on #27's metadata decisions or should update metadata if asset names differ.
-- #29 depends on static export configuration and the final canonical site URL decision. Keep it simple and static unless a dynamic sitemap generator is later required.
-- #30 depends on all visual sections being present. Fix responsive, semantic, focus, contrast, and reduced-motion issues before locking in E2E expectations.
-- #31 depends on #26 and should ideally run after #30 so tests assert the final accessible layout rather than temporary markup.
-- #32 depends on #31 and static export configuration. It is the final release gate for the plain-directory deployment model.
+- There are no issues to implement in this setup pass.
+- Future content or layout issues should generally build from shared primitives
+  first, then update composed sections in `app/page.tsx`, then adjust tests.
+- Future metadata, robots, sitemap, and asset issues should keep public paths
+  compatible with static hosting and verify output under `out/`.
+- Future behavior that touches navigation, CTA URLs, or section anchors should
+  update `lib/navigation.ts`, `lib/env.ts`, and Playwright coverage together to
+  avoid drift.
 
 Key design decisions
-- Stay fully static: do not introduce server actions, route handlers, runtime secrets, or dynamic rendering behavior that would conflict with `output: "export"`.
-- Keep the homepage as a small set of typed, data-driven sections. Copy arrays can live beside each section for readability and easy issue-by-issue review.
-- Use established primitives before creating new styling patterns. Cards should remain for repeated items; broader page bands should be section layouts, not nested card surfaces.
-- Navigation and section IDs must be centralized so header, footer, sitemap, smoke tests, and sections do not drift.
-- CTA links should always come from public env configuration with a safe default, and should use accessible link text rather than icon-only affordances.
-- Metadata should use Next.js `Metadata` in `app/layout.tsx`, with explicit Open Graph and Twitter card fields and public image paths compatible with static hosting.
-- Robots and sitemap should assume the canonical production URL chosen by the project. If no production domain is available when #29 lands, document the fallback and keep replacement localized.
-- Responsive and accessibility review should prioritize keyboard navigation, visible focus states, heading order, landmark structure, contrast, mobile menu behavior, and section spacing at mobile/tablet/desktop widths.
-- E2E coverage should stay narrow: page loads, expected sections render, navigation anchors work, and the primary CTA resolves to the configured target.
-- Final export validation should serve `out/` with the repo's `serve` script and verify the rendered page, static assets, metadata files, robots, and sitemap are reachable without a Next.js server.
+- Keep the site fully static. Avoid server actions, route handlers, runtime
+  secrets, dynamic rendering, or backend dependencies unless a future issue
+  explicitly changes the product contract.
+- Preserve the existing component boundaries: route composition in `app/`, page
+  sections in `components/sections/`, primitives in `components/ui/`, and shared
+  config/utilities in `lib/`.
+- Keep homepage sections small, typed, and data-driven where that improves
+  readability. Add abstractions only when they remove real duplication.
+- Centralize navigation labels and anchor IDs so header, footer, sections, and
+  tests remain aligned.
+- Route all public CTA destination handling through `lib/env.ts` with a safe
+  default for static builds.
+- Validate future changes with the project tooling: `npm run format:check`,
+  `npm run lint`, `npm run build`, `npm run test:e2e`, and
+  `npm run verify:static` when relevant.
