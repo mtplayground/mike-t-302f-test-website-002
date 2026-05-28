@@ -4,6 +4,8 @@ import { cx } from "@/lib/class-names";
 
 const sectionVariants = {
   default: "bg-background",
+  inverse: "bg-foreground text-background",
+  raised: "bg-surface-raised",
   surface: "bg-surface",
 } as const;
 
@@ -21,6 +23,7 @@ type SectionHeaderProps = Readonly<{
   description?: string;
   eyebrow?: string;
   title: string;
+  titleId?: string;
 }>;
 
 export function Section({
@@ -52,11 +55,14 @@ export function SectionHeader({
   description,
   eyebrow,
   title,
+  titleId,
 }: SectionHeaderProps) {
   return (
     <div className={cx("grid max-w-3xl gap-4", className)}>
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <h2 className="text-display-sm">{title}</h2>
+      <h2 id={titleId} className="text-display-sm">
+        {title}
+      </h2>
       {description ? (
         <p className="text-body-lg text-muted">{description}</p>
       ) : null}

@@ -50,11 +50,18 @@ const steps: readonly HowItWorksStep[] = [
 
 export function HowItWorks() {
   return (
-    <Section id="how-it-works" contained={false} className="how-section">
+    <Section
+      id="how-it-works"
+      contained={false}
+      className="how-section"
+      variant="raised"
+      aria-labelledby="how-title"
+    >
       <SectionHeader
         className="how-header"
         eyebrow="How it works"
         title="A delivery loop built for founder momentum"
+        titleId="how-title"
         description="Move from rough direction to shipped software through a repeatable workflow that keeps every step visible."
       />
 
