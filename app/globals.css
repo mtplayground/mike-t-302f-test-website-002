@@ -203,4 +203,46 @@
   .value-card-title {
     @apply text-xl font-bold text-foreground;
   }
+
+  .how-section {
+    @apply border-t bg-surface-raised;
+    scroll-margin-top: 4rem;
+  }
+
+  .how-header {
+    @apply mx-auto text-center;
+  }
+
+  .how-steps {
+    @apply mt-10 grid list-none gap-4 p-0 md:grid-cols-2 xl:grid-cols-4;
+  }
+
+  .how-step {
+    @apply min-w-0;
+  }
+
+  .how-card {
+    @apply relative h-full overflow-hidden;
+  }
+
+  .how-card::before {
+    @apply absolute left-0 top-0 h-1 w-full bg-accent;
+    content: "";
+  }
+
+  .how-card-header {
+    @apply gap-4;
+  }
+
+  .how-step-marker {
+    @apply text-body-sm font-bold text-muted;
+  }
+
+  .how-step-title {
+    @apply text-xl font-bold text-foreground;
+  }
+
+  .how-step-description {
+    @apply mt-4;
+  }
 }
