@@ -50,11 +50,17 @@ const valueItems: readonly ValueItem[] = [
 
 export function ValueProposition() {
   return (
-    <Section id="value" contained={false} className="value-section">
+    <Section
+      id="value"
+      contained={false}
+      className="value-section"
+      aria-labelledby="value-title"
+    >
       <SectionHeader
         className="value-header"
         eyebrow="From conversation to shipped software"
         title="Autonomous SDLC that turns intent into production"
+        titleId="value-title"
         description="Bring the context, constraints, and decisions. The agent team turns them into software increments that are planned, built, checked, and ready for the real world."
       />
 

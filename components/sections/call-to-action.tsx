@@ -8,6 +8,7 @@ export function CallToAction() {
       id="call-to-action"
       contained={false}
       className="cta-section"
+      variant="inverse"
       aria-labelledby="cta-title"
     >
       <div className="cta-content">

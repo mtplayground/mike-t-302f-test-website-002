@@ -43,11 +43,17 @@ const featureBenefits: readonly FeatureBenefit[] = [
 
 export function FeaturesBenefits() {
   return (
-    <Section id="features" contained={false} className="features-section">
+    <Section
+      id="features"
+      contained={false}
+      className="features-section"
+      aria-labelledby="features-title"
+    >
       <SectionHeader
         className="features-header"
         eyebrow="Features and benefits"
         title="Software delivery that stays close to your repo"
+        titleId="features-title"
         description="Agent Team works where your product already lives, with implementation choices that keep the output inspectable, secure, and fully yours."
       />
 

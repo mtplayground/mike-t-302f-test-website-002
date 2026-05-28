@@ -67,6 +67,16 @@
   p {
     @apply m-0;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+    }
+  }
 }
 
 @layer components {
@@ -205,7 +215,7 @@
   }
 
   .how-section {
-    @apply border-t bg-surface-raised;
+    @apply border-t;
     scroll-margin-top: 4rem;
   }
 
@@ -268,7 +278,7 @@
   }
 
   .cta-section {
-    @apply border-t bg-foreground text-background;
+    @apply border-t;
     scroll-margin-top: 4rem;
   }
 
@@ -297,6 +307,6 @@
   }
 
   .cta-button {
-    @apply bg-background text-foreground hover:bg-accent-soft;
+    @apply bg-background text-foreground hover:bg-accent-soft focus-visible:ring-offset-foreground;
   }
 }
