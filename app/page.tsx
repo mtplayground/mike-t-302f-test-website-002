@@ -6,8 +6,8 @@ const projectDetails = [
 
 export default function Home() {
   return (
-    <section className="page-shell" aria-labelledby="intro-title">
-      <div className="intro">
+    <section id="home" className="page-shell" aria-labelledby="intro-title">
+      <div id="setup" className="intro">
         <p className="eyebrow">Issue #1</p>
         <h1 id="intro-title">Next.js project initialized</h1>
         <p className="summary">

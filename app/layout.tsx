@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { ContentContainer } from "@/components/layout/content-container";
+import { Header } from "@/components/layout/header";
 import "./globals.css";
 
 const inter = Inter({
@@ -32,6 +33,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <div className="site-shell">
+          <Header />
           <main id="main-content" className="site-main">
             <ContentContainer>{children}</ContentContainer>
           </main>
