@@ -2,29 +2,47 @@
 
 ## What This Project Is
 
-`mike-t-302f-test-website-002` is a private Next.js web application initialized with the App Router and TypeScript. It is currently a foundation project rather than a feature-rich product.
+`mike-t-302f-test-website-002` is a static Next.js App Router landing page for
+Agent Team, a founder-focused autonomous software development service.
 
 ## Current Behavior
 
-The app serves a single home page at `/` confirming that the Next.js project has been initialized. The page highlights the current setup: App Router, TypeScript, and local development on port `8080`.
+The app serves a single home page at `/`. The page has a sticky header, a hero
+section for "Agent Team for Founders", a value proposition section, and a footer.
+The primary CTA URL is configured through the public environment variable
+`NEXT_PUBLIC_CTA_URL`.
 
 ## Key Features
 
-- Next.js App Router application rooted in `app/`.
-- TypeScript-enabled React pages and layout.
-- Basic global styling in `app/globals.css`.
-- Project metadata configured in `app/layout.tsx`.
-- npm scripts for development, production build, production start, and linting.
+- Static-exported Next.js site using TypeScript and the App Router.
+- Tailwind CSS design tokens for color, typography, spacing, surfaces, and focus
+  states.
+- Responsive root layout with font loading, sticky navigation, mobile menu,
+  shared content container, and footer.
+- Hero section with headline, subhead, tagline, CTA, and a generated bitmap hero
+  image in `public/images/hero-agent-team.png`.
+- Value proposition section with scannable cards about turning ideas into
+  production-ready, secure software through an autonomous SDLC.
+- Shared UI primitives under `components/ui/`: buttons, sections, cards, and
+  icon badges.
 
 ## Architecture And Conventions
 
-- Application routes live under `app/`.
-- Static assets should live under `public/` when added.
-- Shared UI and utilities should be introduced later only when needed, using conventional root folders such as `components/` and `lib/`.
-- The development server is expected to bind to `0.0.0.0:8080`.
-- Build and lint validation use `npm run build` and `npm run lint`.
+- Routes live under `app/`; the root page composes section components from
+  `components/sections/`.
+- Layout components live in `components/layout/`; shared UI primitives live in
+  `components/ui/`.
+- Shared configuration and small utilities live in `lib/`, including navigation
+  data, public environment loading, and class name composition.
+- Static assets live in `public/`.
+- `npm run dev` binds to `0.0.0.0:8080`.
+- `npm run build` emits the static export, and `npm run serve` serves `out/` on
+  `0.0.0.0:8080`.
+- Validation uses `npm run format:check`, `npm run lint`, and `npm run build`.
 
 ## Current Non-Goals
 
-- No backend services, database, authentication, or external API integrations are present.
-- No domain-specific product workflow has been implemented yet.
+- No backend services, database, authentication, or private runtime secrets are
+  present.
+- No dynamic routes or server-only Next.js features should be introduced while
+  the site remains statically exported.
